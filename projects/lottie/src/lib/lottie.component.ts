@@ -1,13 +1,15 @@
 import {
   Component,
-  OnInit,
+  AfterViewInit,
   ViewChild,
   ElementRef,
   Output,
   EventEmitter,
   Input,
   PLATFORM_ID,
-  Inject
+  Inject,
+  NgZone,
+  OnInit
 } from '@angular/core';
 import * as lottie from 'lottie-web';
 import { LottieParams, LottieAnimation } from './symbols';
@@ -21,11 +23,12 @@ import { isPlatformServer } from '@angular/common';
   `,
   styles: []
 })
-export class LottieComponent implements OnInit {
+export class LottieComponent implements OnInit, AfterViewInit {
 
   @Input() params: LottieParams;
   @Input() width: number;
   @Input() height: number;
+  @Input() runOutsideAngular = true;
 
   @Output() animationCreated = new EventEmitter<LottieAnimation>();
 
@@ -36,9 +39,14 @@ export class LottieComponent implements OnInit {
 
   private _params: LottieParams;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: string) { }
+  constructor(@Inject(PLATFORM_ID) private platformId: string, private ngZone: NgZone) { }
 
   ngOnInit() {
+    this.viewWidth = this.width + 'px' || '100%';
+    this.viewHeight = this.height + 'px' || '100%';
+  }
+
+  ngAfterViewInit() {
     if (isPlatformServer(this.platformId)) { return; }
 
     this._params = {
@@ -52,11 +60,18 @@ export class LottieComponent implements OnInit {
       rendererSettings: this.params.rendererSettings
     };
 
+    if (this.runOutsideAngular) {
+      this.ngZone.runOutsideAngular(() => {
+        this.loadAnimation();
+      });
+    } else {
+      this.loadAnimation();
+    }
+
+  }
+
+  loadAnimation() {
     const animation = lottie.loadAnimation(this._params);
-
-    this.viewWidth = this.width + 'px' || '100%';
-    this.viewHeight = this.height + 'px' || '100%';
-
     animation.addEventListener('DOMLoaded', () => {
       this.animationCreated.emit(animation);
     });
