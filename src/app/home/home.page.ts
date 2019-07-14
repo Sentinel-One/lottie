@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { timer } from 'rxjs';
-import { LottieAnimation, LottieParams } from '@fivethree/lottie';
+import { LottieAnimation, LottieParams } from '@sentinel-one/lottie';
 
 @Component({
   selector: 'app-home',

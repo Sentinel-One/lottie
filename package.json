@@ -2,7 +2,7 @@
   "name": "lottie",
   "version": "0.1.0",
   "author": "Marc Stammerjohann",
-  "description": "Lottie Animation Angular Component",
+  "description": "Lottie Animation Angular Wrapper Component",
   "keywords": [
     "lottie",
     "angular",
@@ -12,12 +12,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fivethree-team/lottie.git"
+    "url": "https://github.com/Sentinel-One/lottie"
   },
   "license": "MIT",
-  "homepage": "https://github.com/fivethree-team/lottie#readme",
+  "homepage": "https://github.com/Sentinel-One/lottie#readme",
   "bugs": {
-    "url": "https://github.com/fivethree-team/lottie/issues"
+    "url": "https://github.com/Sentinel-One/lottie/issues"
   },
   "scripts": {
     "ng": "ng",
@@ -27,7 +27,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:plugin": "ng build lottie",
-    "build:prod:plugin": "ng build lottie --prod && cp README.md dist/@fivethree/lottie/.",
+    "build:prod:plugin": "ng build lottie --prod && cp README.md dist/@Sentinel-One/lottie/.",
     "version": "conventional-changelog -p angular -i CHANGELOG.md -s"
   },
   "dependencies": {

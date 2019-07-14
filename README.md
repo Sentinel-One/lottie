@@ -1,6 +1,6 @@
 # Lottie Animation Component
 
-[![npm version](https://badge.fury.io/js/%40fivethree%2Flottie.svg)](https://www.npmjs.com/@fivethree/lottie)
+[![npm version](https://badge.fury.io/js/%40fivethree%2Flottie.svg)](https://www.npmjs.com/@sentinel-one/lottie)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/fivethree-team/lottie/blob/master/LICENSE)
 
 Lottie Animation Wrapper Component for Angular 7 or higher.
@@ -11,6 +11,8 @@ Lottie Animation Wrapper Component for Angular 7 or higher.
 
 ```console
 TBD as ng add soon
+
+npm i @sentinel-one/lottie
 ```
 
 ## 🔨 Usage
@@ -18,7 +20,7 @@ Import the module into your root application module:
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { LottieModule } from '@fivethree/lottie';
+import { LottieModule } from '@sentinel-one/lottie';
 
 @NgModule({
     imports: [
@@ -40,7 +42,7 @@ You need to setup the `lottieParams` in your component:
 
 ```typescript
 import { Component } from '@angular/core';
-import { LottieAnimation, LottieParams } from '@fivethree/lottie';
+import { LottieAnimation, LottieParams } from '@sentinel-one/lottie';
 
 Component({
   selector: 'app-home',

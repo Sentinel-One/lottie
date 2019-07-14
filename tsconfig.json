@@ -18,8 +18,8 @@
       "dom"
     ],
     "paths": {
-      "@fivethree/lottie": [
-        "dist/@fivethree/lottie"
+      "@sentinel-one/lottie": [
+        "dist/@sentinel-one/lottie"
       ]
     }
   }

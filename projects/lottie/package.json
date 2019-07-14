@@ -1,5 +1,5 @@
 {
-  "name": "@fivethree/lottie",
+  "name": "@sentinel-one/lottie",
   "version": "0.1.0",
   "description": "Lottie Animation Component",
   "keywords": [
@@ -11,12 +11,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fivethree-team/lottie.git"
+    "url": "git+https://github.com/Sentinel-One/lottie.git"
   },
   "license": "MIT",
-  "homepage": "https://github.com/fivethree-team/lottie#readme",
+  "homepage": "https://github.com/Sentinel-One/lottie#readme",
   "bugs": {
-    "url": "https://github.com/fivethree-team/lottie/issues"
+    "url": "https://github.com/Sentinel-One/lottie/issues"
   },
   "dependencies": {
   },
