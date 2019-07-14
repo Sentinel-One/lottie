@@ -1,6 +1,6 @@
 # Lottie Animation Component
 
-[![npm version](https://badge.fury.io/js/%40fivethree%2Flottie.svg)](https://www.npmjs.com/@sentinel-one/lottie)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=0.1.2&x2=0)](https://www.npmjs.com/@sentinel-one/lottie)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/fivethree-team/lottie/blob/master/LICENSE)
 
 Lottie Animation Wrapper Component for Angular 7 or higher.
@@ -12,7 +12,7 @@ Lottie Animation Wrapper Component for Angular 7 or higher.
 ```console
 TBD as ng add soon
 
-npm i @sentinel-one/lottie
+npm i @sentinel-one/lottie lottie-web --save
 ```
 
 ## 🔨 Usage
@@ -65,3 +65,8 @@ export class HomePage {
 ```
 
 Save your lottie files in the assets folder and change the `path` param, this way they are copied when building your application.
+
+Internal: build and publish to npm:
+- To build before publishing run:
+ ` npm run build:prod:plugin`
+ - publish from dist/@sentinel-one/lottie (`npm publish --access public`)
