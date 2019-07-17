@@ -115,6 +115,154 @@
           }
         }
       }
+    },
+    "lottie": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/lottie",
+      "sourceRoot": "projects/lottie/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/lottie",
+            "index": "projects/lottie/src/index.html",
+            "main": "projects/lottie/src/main.ts",
+            "polyfills": "projects/lottie/src/polyfills.ts",
+            "tsConfig": "projects/lottie/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/lottie/src/favicon.ico",
+              "projects/lottie/src/assets"
+            ],
+            "styles": [
+              "projects/lottie/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/lottie/src/environments/environment.ts",
+                  "with": "projects/lottie/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "lottie:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "lottie:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lottie:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lottie/src/test.ts",
+            "polyfills": "projects/lottie/src/polyfills.ts",
+            "tsConfig": "projects/lottie/tsconfig.spec.json",
+            "karmaConfig": "projects/lottie/karma.conf.js",
+            "assets": [
+              "projects/lottie/src/favicon.ico",
+              "projects/lottie/src/assets"
+            ],
+            "styles": [
+              "projects/lottie/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/lottie/tsconfig.app.json",
+              "projects/lottie/tsconfig.spec.json",
+              "projects/lottie/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/lottie/e2e/protractor.conf.js",
+            "devServerTarget": "lottie:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lottie:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "s1-lottie": {
+      "projectType": "library",
+      "root": "projects/s1-lottie",
+      "sourceRoot": "projects/s1-lottie/src",
+      "prefix": "s1",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/s1-lottie/tsconfig.lib.json",
+            "project": "projects/s1-lottie/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/s1-lottie/src/test.ts",
+            "tsConfig": "projects/s1-lottie/tsconfig.spec.json",
+            "karmaConfig": "projects/s1-lottie/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/s1-lottie/tsconfig.lib.json",
+              "projects/s1-lottie/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }},
   "defaultProject": "lotti-demo"
 }
