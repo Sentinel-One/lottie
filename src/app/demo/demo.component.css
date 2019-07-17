@@ -1,0 +1,29 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-panel {
+  width: 100%;
+  display: flex;
+  flex: 1;
+  min-height: 50px;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px 0 rgba(140,148,168,.38);
+  border: 1px solid #bcc2d0;
+  transition: border-color .3s linear;
+  position: relative;
+  padding: 9px 0 11px;
+  justify-content: center;
+  align-self: center;
+  box-sizing: border-box;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  color: rgb(126, 74, 172);
+}
