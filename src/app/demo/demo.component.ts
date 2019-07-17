@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
+import {Component} from '@angular/core';
 import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons';
 import {AnimationItem} from 'lottie-web';
 
@@ -11,6 +11,7 @@ export class DemoComponent {
 
   isPlaying        = true;
   icon             = faPause;
+  animation: AnimationItem;
   lottieParams     = {
     path: 'assets/lottie/s1_logo.json',
     renderer: 'svg',
@@ -18,13 +19,8 @@ export class DemoComponent {
     autoplay: true
   };
 
-  private animation: AnimationItem;
-
   onAnimationCreated(animation) {
     this.animation        = animation;
-    this.animation.addEventListener('complete', () => {
-      console.log('hi');
-    });
   }
 
   togglePlay() {
