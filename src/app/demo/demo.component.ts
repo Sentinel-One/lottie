@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons';
 import {AnimationItem} from 'lottie-web';
 
@@ -7,20 +7,24 @@ import {AnimationItem} from 'lottie-web';
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.css']
 })
-export class DemoComponent {
+export class DemoComponent implements OnInit {
 
-  isPlaying        = true;
-  icon             = faPause;
-  animation: AnimationItem;
-  lottieParams     = {
-    path: 'assets/lottie/s1_logo.json',
-    renderer: 'svg',
-    loop: true,
-    autoplay: true
-  };
+  isPlaying = true;
+  icon = faPause;
+  animation: AnimationItem = null;
+  lottieParams;
+
+  ngOnInit(): void {
+    this.lottieParams  = {
+      path: 'assets/lottie/s1_logo.json',
+      renderer: 'svg',
+      loop: true,
+      autoplay: true
+    };
+  }
 
   onAnimationCreated(animation) {
-    this.animation        = animation;
+    this.animation = animation;
   }
 
   togglePlay() {

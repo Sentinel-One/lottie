@@ -1,5 +1,5 @@
 import {
-  AfterViewInit, ChangeDetectorRef,
+  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
@@ -11,8 +11,9 @@ import {
   PLATFORM_ID,
   ViewChild
 } from '@angular/core';
-import Lottie, {AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
+import Lottie, {AnimationConfig, AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
 import {isPlatformServer} from '@angular/common';
+
 
 @Component({
   selector: 's1-lottie',
@@ -26,7 +27,7 @@ import {isPlatformServer} from '@angular/common';
 })
 export class S1LottieComponent implements OnInit, AfterViewInit {
 
-  @Input() params: AnimationConfigWithPath | AnimationConfigWithData | any;
+  @Input() params: AnimationConfigWithPath & AnimationConfigWithData ;
   @Input() width: number;
   @Input() height: number;
   @Input() runOutsideAngular = true;
@@ -52,9 +53,7 @@ export class S1LottieComponent implements OnInit, AfterViewInit {
       return;
     }
 
-
-    // TODO: Add Type
-    const params: any = {
+    const params: AnimationConfigWithPath & AnimationConfigWithData = {
       autoplay: this.params.autoplay,
       animationData: this.params.animationData,
       container: this.params.container || this.lottieContainer.nativeElement,
@@ -75,7 +74,7 @@ export class S1LottieComponent implements OnInit, AfterViewInit {
 
   }
 
-  loadAnimation(params: any) {
+  loadAnimation(params: AnimationConfig | AnimationConfigWithData) {
     const animation: AnimationItem = Lottie.loadAnimation(params);
     this.animationCreated.emit(animation);
   }
