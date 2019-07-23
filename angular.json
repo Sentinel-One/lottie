@@ -32,12 +32,7 @@
               }
             ],
             "styles": [
-              {
-                "input": "src/theme/variables.scss"
-              },
-              {
-                "input": "src/global.scss"
-              }
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -65,30 +60,24 @@
                   "maximumError": "5mb"
                 }
               ]
-            },
-            "ci": {
-              "progress": false
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app:build"
+            "browserTarget": "lotti-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
-            },
-            "ci": {
-              "progress": false
+              "browserTarget": "lotti-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app:build"
+            "browserTarget": "lotti-demo:build"
           }
         },
         "test": {
@@ -96,127 +85,72 @@
           "options": {
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "src/tsconfig.spec.json",
-            "karmaConfig": "src/karma.conf.js",
-            "styles": [],
-            "scripts": [],
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
             "assets": [
-              {
-                "glob": "favicon.ico",
-                "input": "src/",
-                "output": "/"
-              },
-              {
-                "glob": "**/*",
-                "input": "src/assets",
-                "output": "/assets"
-              }
-            ]
-          },
-          "configurations": {
-            "ci": {
-              "progress": false,
-              "watch": false
-            }
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
+            "scripts": []
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
             ]
           }
         },
-        "ionic-cordova-build": {
-          "builder": "@ionic/angular-toolkit:cordova-build",
-          "options": {
-            "browserTarget": "app:build"
-          },
-          "configurations": {
-            "production": {
-              "browserTarget": "app:build:production"
-            }
-          }
-        },
-        "ionic-cordova-serve": {
-          "builder": "@ionic/angular-toolkit:cordova-serve",
-          "options": {
-            "cordovaBuildTarget": "app:ionic-cordova-build",
-            "devServerTarget": "app:serve"
-          },
-          "configurations": {
-            "production": {
-              "cordovaBuildTarget": "app:ionic-cordova-build:production",
-              "devServerTarget": "app:serve:production"
-            }
-          }
-        }
-      }
-    },
-    "app-e2e": {
-      "root": "e2e/",
-      "projectType": "application",
-      "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "app:serve"
+            "devServerTarget": "lotti-demo:serve"
           },
           "configurations": {
-            "ci": {
-              "devServerTarget": "app:serve:ci"
+            "production": {
+              "devServerTarget": "lotti-demo:serve:production"
             }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": "e2e/tsconfig.e2e.json",
-            "exclude": [
-              "**/node_modules/**"
-            ]
           }
         }
       }
     },
-    "lottie": {
-      "root": "projects/lottie",
-      "sourceRoot": "projects/lottie/src",
+    "s1-lottie": {
       "projectType": "library",
-      "prefix": "fiv",
+      "root": "projects/s1-lottie",
+      "sourceRoot": "projects/s1-lottie/src",
+      "prefix": "s1",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/lottie/tsconfig.lib.json",
-            "project": "projects/lottie/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/lottie/ng-package.prod.json"
-            }
+            "tsConfig": "projects/s1-lottie/tsconfig.lib.json",
+            "project": "projects/s1-lottie/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/lottie/src/test.ts",
-            "tsConfig": "projects/lottie/tsconfig.spec.json",
-            "karmaConfig": "projects/lottie/karma.conf.js"
+            "main": "projects/s1-lottie/src/test.ts",
+            "tsConfig": "projects/s1-lottie/tsconfig.spec.json",
+            "karmaConfig": "projects/s1-lottie/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/lottie/tsconfig.lib.json",
-              "projects/lottie/tsconfig.spec.json"
+              "projects/s1-lottie/tsconfig.lib.json",
+              "projects/s1-lottie/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -226,15 +160,5 @@
       }
     }
   },
-  "cli": {
-    "defaultCollection": "@ionic/angular-toolkit"
-  },
-  "schematics": {
-    "@ionic/angular-toolkit:component": {
-      "styleext": "scss"
-    },
-    "@ionic/angular-toolkit:page": {
-      "styleext": "scss"
-    }
-  }
+  "defaultProject": "lotti-demo"
 }

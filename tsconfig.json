@@ -5,11 +5,12 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "module": "es2015",
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
+    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "target": "es5",
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -18,9 +19,16 @@
       "dom"
     ],
     "paths": {
-      "@sentinel-one/lottie": [
-        "dist/@sentinel-one/lottie"
+      "s1-lottie": [
+        "dist/s1-lottie"
+      ],
+      "s1-lottie/*": [
+        "dist/s1-lottie/*"
       ]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }
