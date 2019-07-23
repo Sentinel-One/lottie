@@ -20,7 +20,7 @@ Import the module into your root application module:
 
 ```typescript
 import { NgModule } from '@angular/core';
-import { LottieModule } from '@sentinel-one/lottie';
+import { LottieModule } from '@sentinel-one/s1-lottie';
 
 @NgModule({
     imports: [
@@ -42,7 +42,8 @@ You need to setup the `lottieParams` in your component:
 
 ```typescript
 import { Component } from '@angular/core';
-import { LottieAnimation, LottieParams } from '@sentinel-one/lottie';
+import { S1LottieConfig } from '@sentinel-one/s1-lottie';
+import {AnimationItem} from 'lottie-web';
 
 Component({
   selector: 'app-home',
@@ -51,13 +52,13 @@ Component({
 })
 export class HomePage {
 
-  lottieParams: LottieParams = {
+  lottieParams: S1LottieConfig = {
     path: 'assets/lottie/empty_box.json',
     renderer: 'canvas',
     loop: true
   };
 
-  onAnimationCreated(animation: LottieAnimation) {
+  onAnimationCreated(animation: AnimationItem) {
     animation.play();
     animation.setSpeed(0.8);
   }
