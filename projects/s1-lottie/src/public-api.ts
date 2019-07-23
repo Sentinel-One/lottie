@@ -4,3 +4,4 @@
 
 export * from './lib/s1-lottie.component';
 export * from './lib/s1-lottie.module';
+export * from './lib/s1-lottie';

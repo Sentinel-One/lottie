@@ -13,12 +13,4 @@
   </div>
 </div>
 
-
-<input
-  *ngIf="animation"
-  type="range"
-  min="0"
-  [max]="animation.totalFrames"
-  [ngModel]="animation.currentFrame"
-  class="slider"
-  id="myRange">
+<app-s1-slider *ngIf="animation" [animation]="animation"></app-s1-slider>

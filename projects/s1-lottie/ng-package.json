@@ -1,8 +1,8 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/s1-lottie",
+  "dest": "../../dist/@sentinel-one/s1-lottie",
   "lib": {
-    "flatModuleFile": "sentinel-one-lottie",
+    "flatModuleFile": "sentinel-one",
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
       "lottie-web": "lottie-web"

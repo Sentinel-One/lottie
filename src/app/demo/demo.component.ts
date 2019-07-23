@@ -1,18 +1,21 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons';
 import {AnimationItem} from 'lottie-web';
+import {S1LottieConfig} from '../../../projects/s1-lottie/src/lib/s1-lottie';
 
 @Component({
   selector: 'app-demo',
   templateUrl: './demo.component.html',
   styleUrls: ['./demo.component.css']
 })
-export class DemoComponent implements OnInit {
+export class DemoComponent implements OnInit, AfterViewChecked {
 
   isPlaying = true;
   icon = faPause;
   animation: AnimationItem = null;
-  lottieParams;
+  lottieParams: S1LottieConfig;
+
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.lottieParams  = {
@@ -21,6 +24,10 @@ export class DemoComponent implements OnInit {
       loop: true,
       autoplay: true
     };
+  }
+
+  ngAfterViewChecked() {
+    this.cd.detectChanges();
   }
 
   onAnimationCreated(animation) {

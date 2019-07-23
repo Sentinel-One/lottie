@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:plugin": "ng build s1-lottie",
-    "build:prod:plugin": "ng build s1-lottie --prod && cp README.md dist/@Sentinel-One/lottie/."
+    "build:prod:plugin": "ng build s1-lottie && cp README.md dist/@sentinel-one/s1-lottie/."
   },
   "private": true,
   "dependencies": {

@@ -7,11 +7,13 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {S1LottieModule} from '../../projects/s1-lottie/src/lib/s1-lottie.module';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
+import { S1SliderComponent } from './demo/s1-slider/s1-slider.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DemoComponent
+    DemoComponent,
+    S1SliderComponent
   ],
   imports: [
     BrowserModule,
