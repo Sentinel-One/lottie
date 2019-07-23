@@ -1,6 +1,6 @@
 # Lottie Animation Component
 
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=0.1.2&x2=0)](https://www.npmjs.com/@sentinel-one/lottie)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=0.1.3&x2=0)](https://www.npmjs.com/@sentinel-one/lottie)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/fivethree-team/lottie/blob/master/LICENSE)
 
 Lottie Animation Wrapper Component for Angular 7 or higher.
@@ -12,7 +12,7 @@ Lottie Animation Wrapper Component for Angular 7 or higher.
 ```console
 TBD as ng add soon
 
-npm i @sentinel-one/lottie lottie-web --save
+npm i @sentinel-one/s1-lottie lottie-web --save
 ```
 
 ## 🔨 Usage
@@ -35,7 +35,13 @@ export class AppModule {}
 Add the lottie component to your template:
 
 ```html
-<fiv-lottie [params]="lottieParams" [width]="250" [height]="250" (animationCreated)=onAnimationCreated($event)></fiv-lottie>
+<s1-lottie
+  [params]="lottieParams"
+  [width]="500"
+  [height]="500"
+  [runOutsideAngular]="false"
+  (animationCreated)=onAnimationCreated($event)>
+</s1-lottie>
 ```
 
 You need to setup the `lottieParams` in your component:

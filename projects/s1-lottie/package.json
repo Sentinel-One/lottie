@@ -1,11 +1,10 @@
 {
-  "name": "@sentinel-one/lottie",
-  "version": "0.1.1",
+  "name": "@sentinel-one/s1-lottie",
+  "version": "0.1.3",
   "description": "Lottie Animation Component",
   "keywords": [
     "lottie",
     "angular",
-    "ionic",
     "animation",
     "component"
   ],
@@ -18,11 +17,11 @@
   "bugs": {
     "url": "https://github.com/Sentinel-One/lottie/issues"
   },
-  "dependencies": {
-  },
   "peerDependencies": {
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "lottie-web": "^5.4.4"
+    "@angular/common": "^8.1.1",
+    "@angular/core": "^8.1.1",
+    "lottie-web": "^5.5.6"
+  },
+  "dependencies": {
   }
 }

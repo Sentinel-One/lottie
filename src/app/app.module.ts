@@ -1,23 +1,28 @@
-import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
-
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
+import { DemoComponent } from './demo/demo.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {S1LottieModule} from '../../projects/s1-lottie/src/lib/s1-lottie.module';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
+import { S1SliderComponent } from './demo/s1-slider/s1-slider.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule],
-  providers: [
-    StatusBar,
-    SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+  declarations: [
+    AppComponent,
+    DemoComponent,
+    S1SliderComponent
   ],
+  imports: [
+    BrowserModule,
+    S1LottieModule,
+    FontAwesomeModule,
+    NoopAnimationsModule,
+    FormsModule
+  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

@@ -1,0 +1,16 @@
+<s1-lottie
+  [params]="lottieParams"
+  [width]="500"
+  [height]="500"
+  [runOutsideAngular]="false"
+  (animationCreated)=onAnimationCreated($event)>
+</s1-lottie>
+
+
+<div class="action-panel">
+  <div class="action" (click)="togglePlay()">
+    <fa-icon [icon]="icon"></fa-icon>
+  </div>
+</div>
+
+<app-s1-slider *ngIf="animation" [animation]="animation"></app-s1-slider>
