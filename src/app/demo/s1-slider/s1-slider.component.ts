@@ -1,4 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {AnimationItem} from 'lottie-web';
 
 @Component({
   selector: 'app-s1-slider',
@@ -9,11 +10,12 @@ export class S1SliderComponent {
 
   animData;
 
-  @Input() set animation(animation) {
+  @Input() set animation(animation: AnimationItem) {
     this.animData = animation;
   }
 
-  get animation() {
+  get animation(): AnimationItem {
     return this.animData;
   }
+
 }

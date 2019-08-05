@@ -1,6 +1,6 @@
 # Lottie Animation Component
 
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=0.1.3&x2=0)](https://www.npmjs.com/@sentinel-one/lottie)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=0.1.3&x2=0)](@sentinel-one/s1-lottie)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/fivethree-team/lottie/blob/master/LICENSE)
 
 Lottie Animation Wrapper Component for Angular 7 or higher. no ionic support.
@@ -30,7 +30,7 @@ import { LottieModule } from '@sentinel-one/s1-lottie';
 export class AppModule {}
 ```
 
-## 🦁 Animation
+## 🦄 Animation
 
 Add the lottie component to your template:
 
