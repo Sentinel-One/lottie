@@ -8,14 +8,23 @@ import {AnimationItem} from 'lottie-web';
 })
 export class S1SliderComponent {
 
-  animData;
+  _totalFrames;
+  _currentFrame;
 
-  @Input() set animation(animation: AnimationItem) {
-    this.animData = animation;
+  @Input() set totalFrames(totalFrames) {
+    this._totalFrames = totalFrames;
   }
 
-  get animation(): AnimationItem {
-    return this.animData;
+  get totalFrames(): AnimationItem {
+    return this._totalFrames;
+  }
+
+  @Input() set currentFrame(currentFrame) {
+    this._currentFrame = currentFrame;
+  }
+
+  get currentFrame(): AnimationItem {
+    return this._currentFrame;
   }
 
 }

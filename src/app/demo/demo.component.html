@@ -2,7 +2,8 @@
   [params]="lottieParams"
   [width]="500"
   [height]="500"
-  [runOutsideAngular]="false"
+  [runOutsideAngular]="runOutsideAngular"
+  (enterFrame)="updateAnimationFrames($event)"
   (animationCreated)=onAnimationCreated($event)>
 </s1-lottie>
 
@@ -13,4 +14,5 @@
   </div>
 </div>
 
-<app-s1-slider *ngIf="animation" [animation]="animation"></app-s1-slider>
+<!-- limitation to indicate frames movement when runOutsideAngular === true -->
+<app-s1-slider *ngIf="currentFrame && !runOutsideAngular" [totalFrames]="totalFrames" [currentFrame]="currentFrame"></app-s1-slider>

@@ -11,9 +11,12 @@ import {S1LottieConfig} from '../../../projects/s1-lottie/src/lib/s1-lottie';
 export class DemoComponent implements OnInit, AfterViewChecked {
 
   isPlaying = true;
+  runOutsideAngular = true;
   icon = faPause;
   animation: AnimationItem = null;
   lottieParams: S1LottieConfig;
+  totalFrames;
+  currentFrame;
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -30,8 +33,13 @@ export class DemoComponent implements OnInit, AfterViewChecked {
     this.cd.detectChanges();
   }
 
-  onAnimationCreated(animation: AnimationItem) {
-    this.animation = animation;
+  onAnimationCreated(anim: AnimationItem) {
+    this.animation = anim;
+  }
+
+  updateAnimationFrames({currentFrame, totalFrames}) {
+    this.currentFrame = currentFrame;
+    this.totalFrames = totalFrames;
   }
 
   togglePlay() {

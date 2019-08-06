@@ -2,10 +2,10 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter,
+  EventEmitter, HostListener,
   Inject,
   Input,
-  NgZone,
+  NgZone, OnDestroy,
   OnInit,
   Output,
   PLATFORM_ID,
@@ -25,7 +25,7 @@ import {isPlatformServer} from '@angular/common';
   `,
   styles: []
 })
-export class S1LottieComponent implements OnInit, AfterViewInit {
+export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @Input() params: AnimationConfigWithPath & AnimationConfigWithData ;
   @Input() width: number;
@@ -33,9 +33,11 @@ export class S1LottieComponent implements OnInit, AfterViewInit {
   @Input() runOutsideAngular = true;
 
   @Output() animationCreated = new EventEmitter<AnimationItem>();
+  @Output() enterFrame = new EventEmitter<{ currentFrame, totalFrames }>();
 
   @ViewChild('lottieContainer', {static: true}) lottieContainer: ElementRef;
 
+  private animationInstance: AnimationItem;
   public viewWidth: string;
   public viewHeight: string;
 
@@ -71,12 +73,23 @@ export class S1LottieComponent implements OnInit, AfterViewInit {
     } else {
       this.loadAnimation(params);
     }
-
   }
 
   loadAnimation(params: AnimationConfig | AnimationConfigWithData) {
-    const animation: AnimationItem = Lottie.loadAnimation(params);
-    this.animationCreated.emit(animation);
+    this.animationInstance = Lottie.loadAnimation(params);
+    this.animationCreated.emit(this.animationInstance);
+    // registering the lottie's enterFrame event (https://airbnb.io/projects/lottie-web/)
+    this.animationInstance
+      .addEventListener('enterFrame', () => {
+        this.enterFrame.emit({
+          currentFrame: this.animationInstance['currentFrame'],
+          totalFrames: this.animationInstance['totalFrames']
+        });
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.animationInstance && this.animationInstance.destroy();
   }
 
 }
