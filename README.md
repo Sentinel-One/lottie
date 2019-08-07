@@ -49,7 +49,7 @@ You need to setup the `lottieParams` in your component:
 ```typescript
 import { Component } from '@angular/core';
 import { S1LottieConfig } from '@sentinel-one/s1-lottie';
-import {AnimationItem} from 'lottie-web';
+import { AnimationItem } from 'lottie-web';
 
 Component({
   selector: 'app-home',
