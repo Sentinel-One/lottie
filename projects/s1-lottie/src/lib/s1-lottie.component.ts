@@ -8,7 +8,7 @@ import {
   NgZone, OnDestroy,
   OnInit,
   Output,
-  PLATFORM_ID,
+  PLATFORM_ID, Renderer2,
   ViewChild
 } from '@angular/core';
 import Lottie, {AnimationConfig, AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
@@ -42,6 +42,7 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   public viewHeight: string;
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
+              private renderer: Renderer2,
               private ngZone: NgZone) {
   }
 
@@ -79,13 +80,14 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
     this.animationInstance = Lottie.loadAnimation(params);
     this.animationCreated.emit(this.animationInstance);
     // registering the lottie's enterFrame event (https://airbnb.io/projects/lottie-web/)
-    this.animationInstance
-      .addEventListener('enterFrame', () => {
-        this.enterFrame.emit({
-          currentFrame: this.animationInstance['currentFrame'],
-          totalFrames: this.animationInstance['totalFrames']
-        });
-      });
+    this.renderer.listen(this.animationInstance, 'enterFrame', () => this.onEnterFrame());
+  }
+
+  private onEnterFrame() {
+    this.enterFrame.emit({
+      currentFrame: this.animationInstance['currentFrame'],
+      totalFrames: this.animationInstance['totalFrames']
+    });
   }
 
   ngOnDestroy(): void {

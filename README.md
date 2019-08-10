@@ -73,7 +73,12 @@ export class HomePage {
 
 Save your lottie files in the assets folder and change the `path` param, this way they are copied when building your application.
 
-Internal: build and publish to npm:
+Contribute to this project:
+
+We inspire everyone to contribute to this project, please review the TODO.md for future planning
+and follow the CONTRIBUTING.md.
+
+Internal (requires permissions): build and publish to npm:
 - To build before publishing run:
  ` npm run build:prod:plugin`
- - publish from dist/@sentinel-one/lottie (`npm publish --access public`)
+ - publish from dist/@sentinel-one/s1-lottie (`npm publish --access public`)
