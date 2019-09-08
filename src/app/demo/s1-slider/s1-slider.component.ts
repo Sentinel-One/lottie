@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {AnimationItem} from 'lottie-web';
 
 @Component({
@@ -15,6 +15,9 @@ export class S1SliderComponent {
     this._totalFrames = totalFrames;
   }
 
+  @Output() onSliderChange = new EventEmitter<any>();
+
+
   get totalFrames(): AnimationItem {
     return this._totalFrames;
   }
@@ -27,4 +30,8 @@ export class S1SliderComponent {
     return this._currentFrame;
   }
 
+  onInputChange(event) {
+    debugger;
+    this.onSliderChange.emit(event);
+  }
 }
