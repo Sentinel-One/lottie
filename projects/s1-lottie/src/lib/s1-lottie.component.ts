@@ -12,8 +12,20 @@ import {
   ViewChild
 } from '@angular/core';
 import Lottie, {AnimationConfig, AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
-import {isPlatformServer} from '@angular/common';
+import {isPlatformServer, KeyValue} from '@angular/common';
 
+export enum LottieEventTypes {
+  complete = 'complete',
+  loopComplete = 'loopComplete',
+  enterFrame = 'enterFrame',
+  segmentStart = 'segmentStart',
+  configReady = 'config_ready',  // (when initial config is done)
+  dataReady = 'data_ready', // (when all parts of the animation have been loaded)
+  dataFailed = 'data_failed', // (when part of the animation can not be loaded)
+  loadedImages = 'loaded_images', // (when all image loads have either succeeded or errored)
+  DOMLoaded = 'DOMLoaded', // (when elements have been added to the DOM)
+  destroy = 'destroy'
+}
 
 @Component({
   selector: 's1-lottie',
@@ -33,7 +45,29 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() runOutsideAngular = true;
 
   @Output() animationCreated = new EventEmitter<AnimationItem>();
-  @Output() enterFrame = new EventEmitter<{ currentFrame, totalFrames }>();
+  @Output() enterFrame = new EventEmitter<AnimationItem>();
+  @Output() complete = new EventEmitter<AnimationItem>();
+  @Output() loopComplete = new EventEmitter<AnimationItem>();
+  @Output() segmentStart = new EventEmitter<AnimationItem>();
+  @Output() configReady = new EventEmitter<AnimationItem>();
+  @Output() dataReady = new EventEmitter<AnimationItem>();
+  @Output() dataFailed = new EventEmitter<AnimationItem>();
+  @Output() loadedImages = new EventEmitter<AnimationItem>();
+  @Output() DOMLoaded = new EventEmitter<AnimationItem>();
+  @Output() destroy = new EventEmitter<AnimationItem>();
+
+  eventEmittersMap: {[key: string]: EventEmitter<AnimationItem>} = {
+    complete: this.complete,
+    loopComplete: this.loopComplete,
+    enterFrame: this.enterFrame,
+    segmentStart: this.segmentStart,
+    config_ready: this.configReady,
+    data_ready: this.dataReady,
+    data_failed: this.dataFailed,
+    loaded_images: this.loadedImages,
+    DOMLoaded: this.DOMLoaded,
+    destroy: this.destroy
+  }
 
   @ViewChild('lottieContainer', {static: true}) lottieContainer: ElementRef;
 
@@ -80,14 +114,17 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
     this.animationInstance = Lottie.loadAnimation(params);
     this.animationCreated.emit(this.animationInstance);
     // registering the lottie's enterFrame event (https://airbnb.io/projects/lottie-web/)
-    this.renderer.listen(this.animationInstance, 'enterFrame', () => this.onEnterFrame());
+    this.initListeners();
   }
 
-  private onEnterFrame() {
-    this.enterFrame.emit({
-      currentFrame: this.animationInstance['currentFrame'],
-      totalFrames: this.animationInstance['totalFrames']
+  private initListeners() {
+    Object.values(LottieEventTypes).map(value => {
+      this.renderer.listen(this.animationInstance, value, () => this.onEventHeard(value));
     });
+  }
+
+  private onEventHeard(eventType: LottieEventTypes) {
+    this.eventEmittersMap[eventType].emit(this.animationInstance);
   }
 
   ngOnDestroy(): void {

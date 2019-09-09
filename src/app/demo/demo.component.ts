@@ -9,14 +9,23 @@ import {S1LottieConfig} from '../../../projects/s1-lottie/src/lib/s1-lottie';
   styleUrls: ['./demo.component.css']
 })
 export class DemoComponent implements OnInit, AfterViewChecked {
-
   isPlaying = true;
-  runOutsideAngular = true;
+  runOutsideAngular = false;
   icon = faPause;
   animation: AnimationItem = null;
   lottieParams: S1LottieConfig;
   totalFrames;
   currentFrame;
+
+  private _loopCount: number;
+
+  get loopCount(): number {
+    return this._loopCount;
+  }
+
+  set loopCount(value: number) {
+    this._loopCount = value;
+  }
 
   constructor(private cd: ChangeDetectorRef) {}
 
@@ -27,6 +36,7 @@ export class DemoComponent implements OnInit, AfterViewChecked {
       loop: true,
       autoplay: true
     };
+    this.loopCount = 0;
   }
 
   ngAfterViewChecked() {
@@ -36,10 +46,15 @@ export class DemoComponent implements OnInit, AfterViewChecked {
   onAnimationCreated(anim: AnimationItem) {
     this.animation = anim;
   }
+  onLoopComplete(anim: AnimationItem){
+    this.loopCount++;
+    this.cd.detectChanges();
+  }
 
-  updateAnimationFrames({currentFrame, totalFrames}) {
-    this.currentFrame = currentFrame;
-    this.totalFrames = totalFrames;
+  updateAnimationFrames(anim: AnimationItem) {
+    this.currentFrame = anim['currentFrame'];
+    this.totalFrames = anim['totalFrames'];
+    this.cd.detectChanges();
   }
 
   togglePlay() {
@@ -48,4 +63,20 @@ export class DemoComponent implements OnInit, AfterViewChecked {
     this.isPlaying = !this.isPlaying;
   }
 
+  onSliderChange(event) {
+    const value = Number(event.target.value);
+    const cf = value * this.totalFrames / 100;
+    this.animation['currentFrame'] = cf;
+    if (this.isPlaying) {
+      this.animation.goToAndPlay(cf, true);
+    } else {
+      this.animation.setSpeed(0.5);
+      this.animation.goToAndStop(cf, true);
+      this.animation.setSpeed(1);
+    }
+  }
+
+  onSpeedSelected(event) {
+    debugger;
+  }
 }
