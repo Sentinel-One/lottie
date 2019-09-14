@@ -7,6 +7,8 @@ Lottie Animation Wrapper Component for Angular 7 or higher. no ionic support.
 
 (Originally forked from: fivethree-team/lottie, this fork is independent and can't get updated in front of forked origin )
 
+Hit the [DEMO](https://bnmiolqym.github.stackblitz.io/)
+
 ## 📦 Installation
 
 ```console
