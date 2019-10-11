@@ -2,7 +2,7 @@ import {
   AfterViewInit,
   Component,
   ElementRef,
-  EventEmitter, HostListener,
+  EventEmitter,
   Inject,
   Input,
   NgZone, OnDestroy,
@@ -12,7 +12,8 @@ import {
   ViewChild
 } from '@angular/core';
 import Lottie, {AnimationConfig, AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
-import {isPlatformServer, KeyValue} from '@angular/common';
+import {isPlatformServer} from '@angular/common';
+import {S1LottieFactory} from './s1-lottie.factory';
 
 export enum LottieEventTypes {
   complete = 'complete',
@@ -26,6 +27,8 @@ export enum LottieEventTypes {
   DOMLoaded = 'DOMLoaded', // (when elements have been added to the DOM)
   destroy = 'destroy'
 }
+
+export interface LottieEventType { [key: string]: EventEmitter<AnimationItem>; }
 
 @Component({
   selector: 's1-lottie',
@@ -56,18 +59,7 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() DOMLoaded = new EventEmitter<AnimationItem>();
   @Output() destroy = new EventEmitter<AnimationItem>();
 
-  eventEmittersMap: {[key: string]: EventEmitter<AnimationItem>} = {
-    complete: this.complete,
-    loopComplete: this.loopComplete,
-    enterFrame: this.enterFrame,
-    segmentStart: this.segmentStart,
-    config_ready: this.configReady,
-    data_ready: this.dataReady,
-    data_failed: this.dataFailed,
-    loaded_images: this.loadedImages,
-    DOMLoaded: this.DOMLoaded,
-    destroy: this.destroy
-  }
+  eventEmittersMap: LottieEventType;
 
   @ViewChild('lottieContainer', {static: true}) lottieContainer: ElementRef;
 
@@ -77,29 +69,18 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
               private renderer: Renderer2,
-              private ngZone: NgZone) {
-  }
+              private ngZone: NgZone) {}
 
   ngOnInit() {
+    this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
     this.viewWidth  = this.width + 'px' || '100%';
     this.viewHeight = this.height + 'px' || '100%';
   }
 
   ngAfterViewInit() {
-    if (isPlatformServer(this.platformId)) {
-      return;
-    }
+    if (isPlatformServer(this.platformId)) return;
 
-    const params: AnimationConfigWithPath & AnimationConfigWithData = {
-      autoplay: this.params.autoplay,
-      animationData: this.params.animationData,
-      container: this.params.container || this.lottieContainer.nativeElement,
-      loop: this.params.loop,
-      name: this.params.name,
-      path: this.params.path,
-      renderer: this.params.renderer || 'svg',
-      rendererSettings: this.params.rendererSettings
-    };
+    const params: AnimationConfigWithPath & AnimationConfigWithData = S1LottieFactory.setLottiesParams(this);
 
     if (this.runOutsideAngular) {
       this.ngZone.runOutsideAngular(() => {
