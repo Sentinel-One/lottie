@@ -41,7 +41,7 @@ Add the lottie component to your template:
   [params]="lottieParams"
   [width]="500"
   [height]="500"
-  [runOutsideAngular]="false"
+  [optimize]="false"
   (animationCreated)=onAnimationCreated($event)>
 </s1-lottie>
 ```
@@ -74,6 +74,12 @@ export class HomePage {
 ```
 
 Save your lottie files in the assets folder and change the `path` param, this way they are copied when building your application.
+
+Inputs:
+- width: number - if not specified, the player will take 100% of its host.
+- width: height - if not specified, the player will take 100% of its host.
+- options: of type S1LottieConfig mandatory for setting the Lottie player configuration.
+- optimize: boolean, if true, will load the lottie instance animation outside of Angular zone to escape change detection, for better performance.
 
 Contribute to this project:
 

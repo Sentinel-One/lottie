@@ -1,8 +1,8 @@
 <s1-lottie
-  [params]="lottieParams"
+  [options]="lottieParams"
   [width]="500"
   [height]="500"
-  [runOutsideAngular]="runOutsideAngular"
+  [optimize]="runOutsideAngular"
   (enterFrame)="updateAnimationFrames($event)"
   (animationCreated)=onAnimationCreated($event)
   (loopComplete)="onLoopComplete($event)">

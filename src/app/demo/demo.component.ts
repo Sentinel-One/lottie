@@ -1,6 +1,6 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons';
-import {AnimationItem} from 'lottie-web';
+import {AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
 import {S1LottieConfig} from '../../../projects/s1-lottie/src/lib/s1-lottie';
 
 @Component({

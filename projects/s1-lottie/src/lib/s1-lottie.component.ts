@@ -14,6 +14,7 @@ import {
 import Lottie, {AnimationConfig, AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
 import {isPlatformServer} from '@angular/common';
 import {S1LottieFactory} from './s1-lottie.factory';
+import {S1LottieConfig} from './s1-lottie';
 
 export enum LottieEventTypes {
   complete = 'complete',
@@ -36,16 +37,15 @@ export interface LottieEventType { [key: string]: EventEmitter<AnimationItem>; }
     <div #lottieContainer
          [ngStyle]="{'width': viewWidth, 'height': viewHeight, 'overflow':'hidden', 'margin': '0 auto'}">
     </div>
-
   `,
   styles: []
 })
 export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
 
-  @Input() params: AnimationConfigWithPath & AnimationConfigWithData ;
   @Input() width: number;
   @Input() height: number;
-  @Input() runOutsideAngular = true;
+  @Input() options: S1LottieConfig ;
+  @Input() optimize = true;
 
   @Output() animationCreated = new EventEmitter<AnimationItem>();
   @Output() enterFrame = new EventEmitter<AnimationItem>();
@@ -72,6 +72,8 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
               private ngZone: NgZone) {}
 
   ngOnInit() {
+   // this.supportOlderVersions();
+
     this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
     this.viewWidth  = this.width + 'px' || '100%';
     this.viewHeight = this.height + 'px' || '100%';
@@ -80,19 +82,18 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     if (isPlatformServer(this.platformId)) return;
 
-    const params: AnimationConfigWithPath & AnimationConfigWithData = S1LottieFactory.setLottiesParams(this);
-
-    if (this.runOutsideAngular) {
+    const options: AnimationConfigWithPath & AnimationConfigWithData = S1LottieFactory.setLottiesConfig(this);
+    if (this.optimize) {
       this.ngZone.runOutsideAngular(() => {
-        this.loadAnimation(params);
+        this.loadAnimation(options);
       });
     } else {
-      this.loadAnimation(params);
+      this.loadAnimation(options);
     }
   }
 
-  loadAnimation(params: AnimationConfig | AnimationConfigWithData) {
-    this.animationInstance = Lottie.loadAnimation(params);
+  loadAnimation(options: AnimationConfig | AnimationConfigWithData) {
+    this.animationInstance = Lottie.loadAnimation(options);
     this.animationCreated.emit(this.animationInstance);
     // registering the lottie's enterFrame event (https://airbnb.io/projects/lottie-web/)
     this.initListeners();

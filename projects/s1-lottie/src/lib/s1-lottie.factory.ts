@@ -19,16 +19,16 @@ export class S1LottieFactory {
     };
   }
   
-  static setLottiesParams(s1LottieInstance: S1LottieComponent): AnimationConfigWithPath & AnimationConfigWithData {
+  static setLottiesConfig(s1LottieInstance: S1LottieComponent): AnimationConfigWithPath & AnimationConfigWithData {
     return {
-      autoplay: s1LottieInstance.params.autoplay,
-      animationData: s1LottieInstance.params.animationData,
-      container: s1LottieInstance.params.container || s1LottieInstance.lottieContainer.nativeElement,
-      loop: s1LottieInstance.params.loop,
-      name: s1LottieInstance.params.name,
-      path: s1LottieInstance.params.path,
-      renderer: s1LottieInstance.params.renderer || 'svg',
-      rendererSettings: s1LottieInstance.params.rendererSettings
+      autoplay: s1LottieInstance.options.autoplay,
+      animationData: s1LottieInstance.options.animationData,
+      container: s1LottieInstance.options.container || s1LottieInstance.lottieContainer.nativeElement,
+      loop: s1LottieInstance.options.loop,
+      name: s1LottieInstance.options.name,
+      path: s1LottieInstance.options.path,
+      renderer: s1LottieInstance.options.renderer || 'svg',
+      rendererSettings: s1LottieInstance.options.rendererSettings
     };
   }
 }

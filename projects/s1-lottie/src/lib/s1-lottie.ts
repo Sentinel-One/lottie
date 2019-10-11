@@ -7,5 +7,6 @@ export interface S1LottieConfig {
   path: string;
   autoplay: boolean;
   name?: string;
+  animationData?: any;
   rendererSettings?: SVGRendererConfig | CanvasRendererConfig | HTMLRendererConfig;
 }
