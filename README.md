@@ -38,7 +38,7 @@ Add the lottie component to your template:
 
 ```html
 <s1-lottie
-  [params]="lottieParams"
+  [options]="lottieParams"
   [width]="500"
   [height]="500"
   [optimize]="false"
@@ -75,15 +75,16 @@ export class HomePage {
 
 Save your lottie files in the assets folder and change the `path` param, this way they are copied when building your application.
 
-Inputs:
-- width: number - if not specified, the player will take 100% of its host.
-- height: if not specified, the player will take 100% of its host.
-- options: of type S1LottieConfig mandatory for setting the Lottie player configuration.
-- optimize: boolean, if true, will load the lottie instance animation outside of Angular zone to escape change detection, for better performance.
+## API
 
-Contribute to this project:
+- [width]: number - if not specified, the player will take 100% of its host.
+- [height]: if not specified, the player will take 100% of its host.
+- [options]: of type S1LottieConfig mandatory for setting the Lottie player configuration.
+- [optimize]: boolean, if true, will load the lottie instance animation outside of Angular zone to escape change detection, for better performance.
 
-We inspire everyone to contribute to this project, please review the TODO.md for future planning
+## Contribute:
+
+We'll be happy to get issues/PRs/ from you, please review the TODO.md for future planning
 and follow the CONTRIBUTING.md.
 
 Internal (requires permissions): build and publish to npm:
