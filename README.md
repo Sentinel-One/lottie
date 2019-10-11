@@ -77,7 +77,7 @@ Save your lottie files in the assets folder and change the `path` param, this wa
 
 Inputs:
 - width: number - if not specified, the player will take 100% of its host.
-- width: height - if not specified, the player will take 100% of its host.
+- height: if not specified, the player will take 100% of its host.
 - options: of type S1LottieConfig mandatory for setting the Lottie player configuration.
 - optimize: boolean, if true, will load the lottie instance animation outside of Angular zone to escape change detection, for better performance.
 
