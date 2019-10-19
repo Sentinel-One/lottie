@@ -133,7 +133,7 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.animationInstance && this.animationInstance.destroy();
-    this.observer.disconnect();
+    this.observer && this.observer.disconnect();
   }
 
 }
