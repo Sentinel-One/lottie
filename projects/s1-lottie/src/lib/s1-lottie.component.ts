@@ -84,16 +84,25 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
     const options: AnimationConfigWithPath & AnimationConfigWithData = S1LottieFactory.setLottiesConfig(this);
     if (this.optimize) {
       this.ngZone.runOutsideAngular(() => {
-        this.loadAnimation(options);
-        this.playAnimationOnlyWhenElementAppears();
+        this.setLottie(options);
       });
     } else {
-      this.loadAnimation(options);
-      this.playAnimationOnlyWhenElementAppears();
+      this.setLottie(options);
     }
   }
 
-  playAnimationOnlyWhenElementAppears() {
+  loadAnimation(options: AnimationConfig | AnimationConfigWithData) {
+    this.animationInstance = Lottie.loadAnimation(options);
+    this.animationCreated.emit(this.animationInstance);
+  }
+
+  private setLottie(options) {
+    this.loadAnimation(options);
+    this.initListeners();
+    this.playAnimationOnlyWhenElementAppears();
+  }
+
+  private playAnimationOnlyWhenElementAppears() {
     if (!('IntersectionObserver' in window)) {
       return;
     }
@@ -107,18 +116,12 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
           }
         }
       });
+      this.observer.observe(this.lottieContainer.nativeElement);
     }
-    this.observer.observe(this.lottieContainer.nativeElement);
-  }
-
-  loadAnimation(options: AnimationConfig | AnimationConfigWithData) {
-    this.animationInstance = Lottie.loadAnimation(options);
-    this.animationCreated.emit(this.animationInstance);
-    // registering the lottie's enterFrame event (https://airbnb.io/projects/lottie-web/)
-    this.initListeners();
   }
 
   private initListeners() {
+    // registering the lottie's enterFrame event (https://airbnb.io/projects/lottie-web/)
     for (const eventType of Object.values(LottieEventTypes)) {
       this.renderer.listen(this.animationInstance, eventType, () => this.onEventDetected(eventType));
     }
