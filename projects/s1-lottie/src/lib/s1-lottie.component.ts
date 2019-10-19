@@ -66,14 +66,13 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   private animationInstance: AnimationItem;
   public viewWidth: string;
   public viewHeight: string;
+  observer;
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
               private renderer: Renderer2,
               private ngZone: NgZone) {}
 
   ngOnInit() {
-   // this.supportOlderVersions();
-
     this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
     this.viewWidth  = this.width + 'px' || '100%';
     this.viewHeight = this.height + 'px' || '100%';
@@ -86,10 +85,27 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.optimize) {
       this.ngZone.runOutsideAngular(() => {
         this.loadAnimation(options);
+        this.playAnimationOnlyWhenElementAppears();
       });
     } else {
       this.loadAnimation(options);
+      this.playAnimationOnlyWhenElementAppears();
     }
+  }
+
+  playAnimationOnlyWhenElementAppears() {
+    if (this.options.loop) {
+      this.observer = new IntersectionObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.intersectionRatio !== 0) {
+            this.animationInstance.play();
+          } else {
+            this.animationInstance.pause();
+          }
+        }
+      });
+    }
+    this.observer.observe(this.lottieContainer.nativeElement);
   }
 
   loadAnimation(options: AnimationConfig | AnimationConfigWithData) {
@@ -100,17 +116,18 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   private initListeners() {
-    Object.values(LottieEventTypes).map(value => {
-      this.renderer.listen(this.animationInstance, value, () => this.onEventHeard(value));
-    });
+    for (const eventType of Object.values(LottieEventTypes)) {
+      this.renderer.listen(this.animationInstance, eventType, () => this.onEventDetected(eventType));
+    }
   }
 
-  private onEventHeard(eventType: LottieEventTypes) {
+  private onEventDetected(eventType: LottieEventTypes) {
     this.eventEmittersMap[eventType].emit(this.animationInstance);
   }
 
   ngOnDestroy(): void {
     this.animationInstance && this.animationInstance.destroy();
+    this.observer.disconnect();
   }
 
 }

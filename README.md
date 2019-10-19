@@ -1,6 +1,6 @@
 # Lottie Animation Component
 
-[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=0.1.6&x2=0)](https://www.npmjs.com/package/@sentinel-one/s1-lottie)
+[![npm version](https://d25lcipzij17d.cloudfront.net/badge.svg?id=js&type=6&v=0.1.8&x2=0)](https://www.npmjs.com/package/@sentinel-one/s1-lottie)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/Sentinel-One/lottie/blob/master/LICENSE)
 
 Lottie Animation Wrapper Component for Angular 7 or higher. no ionic support.
@@ -77,10 +77,10 @@ Save your lottie files in the assets folder and change the `path` param, this wa
 
 ## API
 
-- [width]: number - if not specified, the player will take 100% of its host.
-- [height]: if not specified, the player will take 100% of its host.
-- [options]: of type S1LottieConfig mandatory for setting the Lottie player configuration.
-- [optimize]: boolean, if true, will load the lottie instance animation outside of Angular zone to escape change detection, for better performance.
+- width: number - if not specified, the player will take 100% of its host.
+- height: if not specified, the player will take 100% of its host.
+- options: of type S1LottieConfig mandatory for setting the Lottie player configuration.
+- optimize: boolean, if true, will load the lottie instance animation outside of Angular zone to escape change detection, for better performance.
 
 ## Contribute:
 
