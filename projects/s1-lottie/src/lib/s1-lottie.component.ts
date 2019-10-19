@@ -94,6 +94,9 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   playAnimationOnlyWhenElementAppears() {
+    if (!('IntersectionObserver' in window)) {
+      return;
+    }
     if (this.options.loop) {
       this.observer = new IntersectionObserver((entries) => {
         for (const entry of entries) {
