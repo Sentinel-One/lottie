@@ -10,7 +10,7 @@ import {S1LottieConfig} from '../../../projects/s1-lottie/src/lib/s1-lottie';
 })
 export class DemoComponent implements OnInit, AfterViewChecked {
   isPlaying = true;
-  runOutsideAngular = false;
+  runOutsideAngular = true;
   icon = faPause;
   animation: AnimationItem = null;
   lottieParams: S1LottieConfig;

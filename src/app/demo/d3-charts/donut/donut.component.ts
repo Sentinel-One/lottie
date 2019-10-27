@@ -19,22 +19,17 @@ export class DonutComponent implements OnInit {
     this.ngZone.runOutsideAngular(() => {
       const data = [48, 21, 65, 30, 16, 2];
       const colors = Utils.getColors();
+      const innerRadius = 50;
+      const outerRadius = 100;
+      const duration = 2000;
+      const selector = '#chart';
 
-      const sizes = {
-        innerRadius: 50,
-        outerRadius: 100
-      };
-
-      const durations = {
-        entryAnimation: 2000
-      };
-
-      d3.select('#chart').html('');
+      d3.select(selector).html('');
       const generator = d3.pie().sort(null);
 
       const chart = generator(data);
 
-      const arcs = d3.select('#chart')
+      const arcs = d3.select(selector)
         .append('g')
         .attr('transform', 'translate(100, 100)')
         .selectAll('path')
@@ -43,15 +38,15 @@ export class DonutComponent implements OnInit {
         .append('path')
         .style('fill', (d, i) => colors[i]);
 
-      const angleInterpolation = d3.interpolate(generator.startAngle()(null), generator.endAngle()(null));
-
-      const innerRadiusInterpolation = d3.interpolate(0, sizes.innerRadius);
-      const outerRadiusInterpolation = d3.interpolate(0, sizes.outerRadius);
+      const angleInterpolation = d3.interpolate(
+        generator.startAngle()(null),
+        generator.endAngle()(null)
+      );
 
       const arc: any = d3.arc();
 
       arcs.transition()
-        .duration(durations.entryAnimation)
+        .duration(duration)
         .attrTween('d', d => {
           const originalEnd = d.endAngle;
           return t => {
@@ -66,13 +61,13 @@ export class DonutComponent implements OnInit {
           };
         });
 
-      d3.select('#chart')
+      d3.select(selector)
         .transition()
-        .duration(durations.entryAnimation)
+        .duration(duration)
         .tween('arcRadii', () => {
           return t => arc
-            .innerRadius(innerRadiusInterpolation(t))
-            .outerRadius(outerRadiusInterpolation(t));
+            .innerRadius(d3.interpolate(0, innerRadius)(t))
+            .outerRadius(d3.interpolate(0, outerRadius)(t));
         });
     });
   }
