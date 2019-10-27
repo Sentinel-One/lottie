@@ -4,7 +4,17 @@
   align-items: center;
 }
 
-.action-panel {
+.top-section h2 {
+  text-align: center;
+}
+
+.mid-section {
+
+}
+
+.top-section .action-panel {
+  background: ivory;
+  margin-top: -20px;
   width: 100%;
   display: flex;
   flex: 1;
@@ -20,7 +30,7 @@
   box-sizing: border-box;
 }
 
-.action {
+.top-section .action {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,25 +38,29 @@
   color: rgb(126, 74, 172);
 }
 
-.example-h2 {
+.top-section .example-h2 {
   margin: 10px;
 }
 
-.example-section {
+.top-section .example-section {
   display: flex;
   align-content: center;
   align-items: center;
   height: 60px;
 }
 
-.example-margin {
+.top-section .example-margin {
   margin: 10px;
 }
 
-.mat-slider-horizontal {
+.top-section .mat-slider-horizontal {
   width: 300px;
 }
 
-.mat-slider-vertical {
+.top-section .mat-slider-vertical {
   height: 300px;
+}
+
+.top-section h1 {
+  text-align: center;
 }

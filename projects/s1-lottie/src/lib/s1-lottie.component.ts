@@ -109,13 +109,13 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
     if (this.options.loop) {
       this.observer = new IntersectionObserver((entries) => {
         for (const entry of entries) {
-          if (entry.intersectionRatio !== 0) {
+          if (entry.intersectionRatio > 0.5) {
             this.animationInstance.play();
           } else {
             this.animationInstance.pause();
           }
         }
-      });
+      }, { threshold: 0.5});
       this.observer.observe(this.lottieContainer.nativeElement);
     }
   }
