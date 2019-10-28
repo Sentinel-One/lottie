@@ -1,14 +1,46 @@
-.box {
-  background-color: #218D9B;
-  height: 200px;
-  width: 200px;
+@keyframes scale {
+  from {
+    transform: scale(0.5);
+  }
+
+  to {
+    transform: scale(1);
+  }
 }
 
-.transform {
-  transition: all 2s ease;
+.heart {
+  background-color: red;
+  display: inline-block;
+  height: 30px;
+  margin: 10px 10px;
+  position: relative;
+  top: 0;
+  transform: rotate(-45deg);
+  width: 30px;
+
+  animation-duration: 1000ms;
+  animation-name: scale;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
-.scaled {
-  opacity: 0.7;
-  transform: scale(0.5);
+.heart:before,
+.heart:after {
+  content: "";
+  background-color: red;
+  border-radius: 50%;
+  height: 30px;
+  position: absolute;
+  width: 30px;
 }
+
+.heart:before {
+  top: -15px;
+  left: 0;
+}
+
+.heart:after {
+  left: 15px;
+  top: 0;
+}
+
