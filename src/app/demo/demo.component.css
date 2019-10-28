@@ -64,3 +64,10 @@
 .top-section h1 {
   text-align: center;
 }
+
+.web-anim {
+  width: fit-content;
+  height: 40px;
+  padding: 10px;
+  background: cadetblue;
+}

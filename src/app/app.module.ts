@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import { S1SliderComponent } from './demo/s1-slider/s1-slider.component';
 import { DonutComponent } from './demo/d3-charts/donut/donut.component';
 import { AnimCubeComponent } from './demo/anim-cube/anim-cube.component';
+import { WebAnimDirective } from './demo/web-anim.directive';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { AnimCubeComponent } from './demo/anim-cube/anim-cube.component';
     DemoComponent,
     S1SliderComponent,
     DonutComponent,
-    AnimCubeComponent
+    AnimCubeComponent,
+    WebAnimDirective
   ],
   imports: [
     BrowserModule,
