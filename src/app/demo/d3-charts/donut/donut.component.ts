@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
 import { Utils } from './utils';
 
@@ -7,12 +7,19 @@ import { Utils } from './utils';
   templateUrl: './donut.component.html',
   styleUrls: ['./donut.component.css']
 })
-export class DonutComponent implements OnInit {
+export class DonutComponent implements AfterViewInit, OnInit {
+  @ViewChild('s1chart', {static: true}) s1chart: ElementRef;
 
   constructor(private ngZone: NgZone) { }
 
   ngOnInit() {
-    this.draw();
+    // start the demo running this.draw(); from here
+  }
+
+  ngAfterViewInit(): void {
+    if ( this.s1chart.nativeElement ) {
+      this.draw();
+    }
   }
 
   draw() {
@@ -20,7 +27,7 @@ export class DonutComponent implements OnInit {
       const data = [48, 21, 65, 30, 16, 2];
       const colors = Utils.getColors();
       const innerRadius = 50;
-      const outerRadius = 100;
+      const outerRadius = 70;
       const duration = 2000;
       const selector = '#chart';
 
