@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, NgZone, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
 import { Utils } from './utils';
 
@@ -9,6 +9,10 @@ import { Utils } from './utils';
 })
 export class DonutComponent implements AfterViewInit, OnInit {
   @ViewChild('s1chart', {static: true}) s1chart: ElementRef;
+
+  @Input() set loopCount(count) {
+    this.draw();
+  }
 
   constructor(private ngZone: NgZone) { }
 
