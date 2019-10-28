@@ -3,17 +3,16 @@ import {AfterViewInit, Directive, ElementRef, OnDestroy} from '@angular/core';
 @Directive({
   selector: '[appWebAnim]'
 })
-export class WebAnimDirective implements AfterViewInit, OnDestroy {
+export class WebAnimDirective implements AfterViewInit {
 
-  rAF;
   constructor(private el: ElementRef) { }
 
   ngAfterViewInit(): void {
-    this.rAF = requestAnimationFrame(() => this.animate());
+    this.animate();
   }
 
   animate() {
-    // web animation API
+    // web animation API no need raf
     this.el.nativeElement.animate(
       [
         { transform: 'rotate(0) translate3D(-50%, -50%, 0)', color: '#000' },
@@ -23,13 +22,6 @@ export class WebAnimDirective implements AfterViewInit, OnDestroy {
         duration: 3000,
         iterations: Infinity
       });
-  }
-
-  ngOnDestroy(): void {
-
-    if (this.rAF) {
-      cancelAnimationFrame(this.rAF);
-    }
   }
 
 }
