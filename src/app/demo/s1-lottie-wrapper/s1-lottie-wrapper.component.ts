@@ -1,14 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons';
 import {AnimationItem} from 'lottie-web';
-import {S1LottieConfig} from '../../../projects/s1-lottie/src/lib/s1-lottie';
+import {S1LottieConfig} from '../../../../projects/s1-lottie/src/lib/s1-lottie';
 
 @Component({
-  selector: 'app-demo',
-  templateUrl: './demo.component.html',
-  styleUrls: ['./demo.component.css']
+  selector: 'app-lottie',
+  templateUrl: './s1-lottie-wrapper.component.html',
+  styleUrls: ['./s1-lottie-wrapper.css']
 })
-export class DemoComponent implements OnInit {
+export class S1LottieWrapperComponent implements OnInit {
+
   isPlaying = true;
   runOutsideAngular = true;
   icon = faPause;

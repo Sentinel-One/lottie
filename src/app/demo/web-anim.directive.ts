@@ -13,7 +13,7 @@ export class WebAnimDirective implements AfterViewInit {
 
   animate() {
     // web animation API no need raf
-    this.el.nativeElement.animate(
+    const ref = this.el.nativeElement.animate(
       [
         { transform: 'rotate(0) translate3D(-50%, -50%, 0)', color: '#000' },
         { color: '#431236', offset: 0.3},
@@ -22,6 +22,8 @@ export class WebAnimDirective implements AfterViewInit {
         duration: 3000,
         iterations: Infinity
       });
+
+    // ref.pause();
   }
 
 }

@@ -71,3 +71,11 @@
   padding: 10px;
   background: cadetblue;
 }
+
+.divider {
+  height: 10px;
+  border: 1px solid gray;
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+}

@@ -1,0 +1,20 @@
+
+<div>
+  We run the animation only while on viewport and outside of Angular
+</div>
+  <s1-lottie
+    [options]="lottieParams"
+    [width]="300"
+    [height]="300"
+    [optimize]="runOutsideAngular"
+    (animationCreated)=onAnimationCreated($event)>
+  </s1-lottie>
+
+
+  <div class="action-panel">
+    <div class="action" (click)="togglePlay()">
+      <fa-icon [icon]="icon"></fa-icon>
+    </div>
+  </div>
+
+
