@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {DonutComponent} from './donut/donut.component';
+import {RouterModule} from '@angular/router';
+import {routes} from './charts-routes';
 
 
 
@@ -9,7 +11,8 @@ import {DonutComponent} from './donut/donut.component';
     DonutComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes)
   ],
   exports: [
     DonutComponent,

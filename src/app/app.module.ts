@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DemoComponent } from './demo/demo.component';
@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 import { S1LottieWrapperComponent } from './demo/s1-lottie-wrapper/s1-lottie-wrapper.component';
 import { WebAnimDirective } from './demo/web-anim.directive';
 import {AppRoutingModule} from './app-routes.module';
-import {D3chartsModule} from '../../projects/d3charts/d3charts.module';
+import {D3chartsModule} from './d3charts/d3charts.module';
 import {CanvasDemoComponent} from './demo/canvas-demo/canvas-demo.component';
 
 @NgModule({

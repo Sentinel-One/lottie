@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Input, NgZone, OnInit, ViewChild} from '@angular/core';
 import * as d3 from 'd3';
 import { Utils } from './utils';
+import {Pie} from 'd3';
 
 @Component({
   selector: 'app-donut',
@@ -28,6 +29,7 @@ export class DonutComponent implements AfterViewInit, OnInit {
 
   draw() {
     this.ngZone.runOutsideAngular(() => {
+
       const data = [48, 21, 65, 30, 16, 2];
       const colors = Utils.getColors();
       const innerRadius = 50;
@@ -35,8 +37,9 @@ export class DonutComponent implements AfterViewInit, OnInit {
       const duration = 2000;
       const selector = '#chart';
 
+
       d3.select(selector).html('');
-      const generator = d3.pie().sort(null);
+      const generator: Pie<any, number | { valueOf(): number; }> = d3.pie();
 
       const chart = generator(data);
 
@@ -65,9 +68,7 @@ export class DonutComponent implements AfterViewInit, OnInit {
             if (currentAngle < d.startAngle) {
               return '';
             }
-
             d.endAngle = Math.min(currentAngle, originalEnd);
-
             return arc(d);
           };
         });
@@ -79,7 +80,9 @@ export class DonutComponent implements AfterViewInit, OnInit {
           return t => arc
             .innerRadius(d3.interpolate(0, innerRadius)(t))
             .outerRadius(d3.interpolate(0, outerRadius)(t));
-        });
+        })
+        .on('end', () => this.draw())
+      ;
     });
   }
 }
