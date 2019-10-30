@@ -6,7 +6,12 @@ import {S1LottieConfig} from '../../../../projects/s1-lottie/src/lib/s1-lottie';
 @Component({
   selector: 'app-lottie',
   templateUrl: './s1-lottie-wrapper.component.html',
-  styleUrls: ['./s1-lottie-wrapper.css']
+  styles: [`:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  `]
 })
 export class S1LottieWrapperComponent implements OnInit {
 

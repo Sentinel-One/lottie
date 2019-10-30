@@ -1,23 +1,18 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import {DemoComponent} from './demo/demo.component';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {S1LottieWrapperComponent} from './demo/s1-lottie-wrapper/s1-lottie-wrapper.component';
 import {ChartWrapperComponent} from './demo/chart-wrapper/chart-wrapper.component';
+import {AppLandingComponent} from './demo/landing/landing.component';
 
 const routes: Routes = [
-  { path: 'demo', component: DemoComponent, children: [
-        { path: 'lottie', component: S1LottieWrapperComponent },
-        { path: 'd3chart', component: ChartWrapperComponent },
-    ] },
-  {
-    path: '',
-    redirectTo: 'demo',
-    pathMatch: 'full'
-  }
+  {path: '', component: AppLandingComponent},
+  {path: 'lottie', component: S1LottieWrapperComponent},
+  {path: 'd3chart', component: ChartWrapperComponent},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

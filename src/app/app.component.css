@@ -1,7 +1,52 @@
-.divider {
-  height: 10px;
-  border: 1px solid gray;
-  display: inline-block;
-  margin-left: 5px;
-  margin-right: 5px;
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 60px;
+}
+
+
+
+.header {
+  margin: 60px 0;
+  display: flex;
+}
+
+.title {
+  letter-spacing: .5px;
+  font-size: 30px;
+}
+
+a {
+  display: flex;
+  flex-direction: column;
+  margin-right: 20px;
+  text-decoration: none;
+  color:rgb(141, 149, 169);
+  letter-spacing: .5px;
+  font-size: 14px;
+}
+
+.active-link {
+  color: #7e4aac;
+}
+
+.marker {
+  width: 0;
+  height: 3px;
+  background-color: #7e4aac;
+  margin-top: 6px;
+}
+
+.active-link .marker {
+  width: auto;
+  animation: .25s itemStretch;
+}
+@keyframes itemStretch {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
 }

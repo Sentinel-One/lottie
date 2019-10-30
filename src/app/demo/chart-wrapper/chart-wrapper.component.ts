@@ -1,23 +1,28 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-chart',
-  templateUrl: './chart-wrapper.component.html',
-  styleUrls: ['./chart-wrapper.css']
+  template: `
+    <app-donut [data]="data"></app-donut>`,
+  styles: [`:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  `]
 })
-export class ChartWrapperComponent implements OnInit {
+export class ChartWrapperComponent implements OnInit, OnDestroy {
 
   data;
+  randomInterval;
 
   static randomizeData() {
     return Math.floor((Math.random() * 10) + 1);
   }
 
-  constructor() {}
-
   ngOnInit(): void {
-    this.data = [48, 21, 65, 30];
-    setInterval(() => {
+    this.data           = [48, 21, 65, 30];
+    this.randomInterval = setInterval(() => {
       const dataset = [];
       this.data.forEach(() => {
         const datum = ChartWrapperComponent.randomizeData();
@@ -25,6 +30,10 @@ export class ChartWrapperComponent implements OnInit {
       });
       this.data = dataset;
     }, 2000);
+  }
+
+  ngOnDestroy(): void {
+    clearInterval(this.randomInterval);
   }
 
 }
