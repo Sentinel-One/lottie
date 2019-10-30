@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, NgZone} from '@angular/core';
+import {Component, Input, NgZone} from '@angular/core';
 import {ChartDrawerService} from './chart-drawer.service';
 
 @Component({
