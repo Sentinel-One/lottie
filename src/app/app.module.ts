@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule, NgModuleFactoryLoader, SystemJsNgModuleLoader} from '@angular/core';
+import {NgModule} from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { DemoComponent } from './demo/demo.component';
@@ -10,7 +10,8 @@ import { S1LottieWrapperComponent } from './demo/s1-lottie-wrapper/s1-lottie-wra
 import { WebAnimDirective } from './demo/web-anim.directive';
 import {AppRoutingModule} from './app-routes.module';
 import {D3chartsModule} from './d3charts/d3charts.module';
-import {CanvasDemoComponent} from './demo/canvas-demo/canvas-demo.component';
+import {ChartWrapperComponent} from './demo/chart-wrapper/chart-wrapper.component';
+import {DonutComponent} from './d3charts/donut/donut.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {CanvasDemoComponent} from './demo/canvas-demo/canvas-demo.component';
     DemoComponent,
     S1LottieWrapperComponent,
     WebAnimDirective,
-    CanvasDemoComponent
+    ChartWrapperComponent
   ],
   imports: [
     BrowserModule,
