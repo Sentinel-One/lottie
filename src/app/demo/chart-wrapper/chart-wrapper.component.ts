@@ -13,22 +13,19 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 })
 export class ChartWrapperComponent implements OnInit, OnDestroy {
 
-  data;
-  randomInterval;
+  data: number[];
+  randomInterval: number;
 
   static randomizeData() {
     return Math.floor((Math.random() * 10) + 1);
   }
 
   ngOnInit(): void {
-    this.data           = [48, 21, 65, 30];
+    this.data = [48, 21, 65, 30];
     this.randomInterval = setInterval(() => {
-      const dataset = [];
-      this.data.forEach(() => {
-        const datum = ChartWrapperComponent.randomizeData();
-        dataset.push(datum);
+      this.data = this.data.map(() => {
+        return  ChartWrapperComponent.randomizeData();
       });
-      this.data = dataset;
     }, 2000);
   }
 

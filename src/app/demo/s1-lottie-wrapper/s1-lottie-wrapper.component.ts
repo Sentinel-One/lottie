@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons';
 import {AnimationItem} from 'lottie-web';
 import {S1LottieConfig} from '../../../../projects/s1-lottie/src/lib/s1-lottie';
@@ -20,9 +20,6 @@ export class S1LottieWrapperComponent implements OnInit {
   icon = faPause;
   animation: AnimationItem = null;
   lottieParams: S1LottieConfig;
-  totalFrames;
-  currentFrame;
-
 
   constructor() {}
 
