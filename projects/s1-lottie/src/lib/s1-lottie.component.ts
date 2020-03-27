@@ -66,7 +66,7 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   private animationInstance: AnimationItem;
   public viewWidth: string;
   public viewHeight: string;
-  observer;
+  observer: IntersectionObserver;
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
               private renderer: Renderer2,
@@ -107,7 +107,7 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
       return;
     }
     if (this.options.loop) {
-      this.observer = new IntersectionObserver((entries) => {
+      this.observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
         for (const entry of entries) {
           if (entry.intersectionRatio !== 0) {
             this.animationInstance.play();
