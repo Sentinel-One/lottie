@@ -69,14 +69,14 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   observer: IntersectionObserver;
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
-              private renderer: Renderer2,
-              private ngZone: NgZone) {}
+  private renderer: Renderer2,
+  private ngZone: NgZone) {}
 
-  ngOnInit() {
-    this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
-    this.viewWidth  = this.width + 'px' || '100%';
-    this.viewHeight = this.height + 'px' || '100%';
-  }
+ngOnInit() {
+  this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
+  this.viewWidth  = this.width + 'px' || '100%';
+  this.viewHeight = this.height + 'px' || '100%';
+}
 
   ngAfterViewInit() {
     if (isPlatformServer(this.platformId)) return;
