@@ -1,5 +1,11 @@
 # S1Lottie
 
+UPDATED to support V9, IVY is opt out to avoid following warning:
+
+"It is not recommended to publish Ivy libraries to NPM repositories."
+
+Meaning it should support the prev rendering engine as well.
+
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
 
 ## Code scaffolding
