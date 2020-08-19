@@ -63,6 +63,13 @@ export class DemoComponent implements OnInit, AfterViewChecked {
     this.isPlaying = !this.isPlaying;
   }
 
+  changeAnimation() {
+    this.lottieParams = {
+      ...this.lottieParams,
+      path: 'assets/lottie/s1_test.json'
+    };
+  }
+
   onSliderChange(event) {
     const value = Number(event.target.value);
     const cf = value * this.totalFrames / 100;

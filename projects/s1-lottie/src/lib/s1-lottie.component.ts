@@ -5,10 +5,10 @@ import {
   EventEmitter,
   Inject,
   Input,
-  NgZone, OnDestroy,
+  NgZone, OnChanges, OnDestroy,
   OnInit,
   Output,
-  PLATFORM_ID, Renderer2,
+  PLATFORM_ID, Renderer2, SimpleChanges,
   ViewChild
 } from '@angular/core';
 import Lottie, {AnimationConfig, AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
@@ -29,7 +29,9 @@ export enum LottieEventTypes {
   destroy = 'destroy'
 }
 
-export interface LottieEventType { [key: string]: EventEmitter<AnimationItem>; }
+export interface LottieEventType {
+  [key: string]: EventEmitter<AnimationItem>;
+}
 
 @Component({
   selector: 's1-lottie',
@@ -40,11 +42,11 @@ export interface LottieEventType { [key: string]: EventEmitter<AnimationItem>; }
   `,
   styles: []
 })
-export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
+export class S1LottieComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 
   @Input() width: number;
   @Input() height: number;
-  @Input() options: S1LottieConfig ;
+  @Input() options: S1LottieConfig;
   @Input() optimize = true;
 
   @Output() animationCreated = new EventEmitter<AnimationItem>();
@@ -69,14 +71,21 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   observer: IntersectionObserver;
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
-  private renderer: Renderer2,
-  private ngZone: NgZone) {}
+              private renderer: Renderer2,
+              private ngZone: NgZone) {
+  }
 
-ngOnInit() {
-  this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
-  this.viewWidth  = this.width + 'px' || '100%';
-  this.viewHeight = this.height + 'px' || '100%';
-}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.options.firstChange && changes.options.previousValue.path !== changes.options.currentValue.path) {
+      this.loadAnimation(changes.options.currentValue);
+    }
+  }
+
+  ngOnInit() {
+    this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
+    this.viewWidth = this.width + 'px' || '100%';
+    this.viewHeight = this.height + 'px' || '100%';
+  }
 
   ngAfterViewInit() {
     if (isPlatformServer(this.platformId)) return;
@@ -92,6 +101,7 @@ ngOnInit() {
   }
 
   loadAnimation(options: AnimationConfig | AnimationConfigWithData) {
+    this.animationInstance?.destroy();
     this.animationInstance = Lottie.loadAnimation(options);
     this.animationCreated.emit(this.animationInstance);
   }
