@@ -68,6 +68,12 @@ export class DemoComponent implements OnInit, AfterViewChecked {
       ...this.lottieParams,
       path: 'assets/lottie/s1_test.json'
     };
+    setTimeout(()=> {
+      this.lottieParams = {
+        ...this.lottieParams,
+        path: 'assets/lottie/s1_logo.json'
+      };
+    }, 600)
   }
 
   onSliderChange(event) {
@@ -84,6 +90,5 @@ export class DemoComponent implements OnInit, AfterViewChecked {
   }
 
   onSpeedSelected(event) {
-    debugger;
   }
 }

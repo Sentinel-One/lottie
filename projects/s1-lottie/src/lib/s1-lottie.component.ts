@@ -61,14 +61,14 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   @Output() DOMLoaded = new EventEmitter<AnimationItem>();
   @Output() destroy = new EventEmitter<AnimationItem>();
 
-  eventEmittersMap: LottieEventType;
+  private eventEmittersMap: LottieEventType;
 
   @ViewChild('lottieContainer', {static: true}) lottieContainer: ElementRef;
 
   private animationInstance: AnimationItem;
   public viewWidth: string;
   public viewHeight: string;
-  observer: IntersectionObserver;
+  private observer: IntersectionObserver;
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
               private renderer: Renderer2,
@@ -76,8 +76,11 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (!changes.options.firstChange && changes.options.previousValue.path !== changes.options.currentValue.path) {
-      this.loadAnimation(changes.options.currentValue);
+    if (!changes.options.firstChange) {
+      this.options = changes.options.currentValue;
+      const options: AnimationConfigWithPath & AnimationConfigWithData = S1LottieFactory.setLottiesConfig(this);
+      this.animationInstance?.destroy();
+      this.setS1Lottie(options);
     }
   }
 
@@ -89,8 +92,11 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnChanges, OnDe
 
   ngAfterViewInit() {
     if (isPlatformServer(this.platformId)) return;
-
     const options: AnimationConfigWithPath & AnimationConfigWithData = S1LottieFactory.setLottiesConfig(this);
+    this.setS1Lottie(options);
+  }
+
+  setS1Lottie(options) {
     if (this.optimize) {
       this.ngZone.runOutsideAngular(() => {
         this.setLottie(options);
@@ -101,7 +107,6 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   }
 
   loadAnimation(options: AnimationConfig | AnimationConfigWithData) {
-    this.animationInstance?.destroy();
     this.animationInstance = Lottie.loadAnimation(options);
     this.animationCreated.emit(this.animationInstance);
   }
@@ -142,8 +147,8 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   }
 
   ngOnDestroy(): void {
-    this.animationInstance && this.animationInstance.destroy();
-    this.observer && this.observer.disconnect();
+    this?.animationInstance.destroy();
+    this?.observer.disconnect();
   }
 
 }
