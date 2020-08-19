@@ -10,11 +10,11 @@
 
 
 <div class="action-panel">
-  <div class="action" (click)="togglePlay()">
+  <div class="action" (click)="changeAnimation()">
     <fa-icon [icon]="icon"></fa-icon>
   </div>
 </div>
 
 <!-- limitation to indicate frames movement when runOutsideAngular === true -->
-<app-s1-slider *ngIf="currentFrame && !runOutsideAngular" [totalFrames]="totalFrames" [currentFrame]="currentFrame" (onSliderChange)="onSliderChange($event)"></app-s1-slider>
-<h1>{{loopCount}}</h1>
+<!--<app-s1-slider *ngIf="currentFrame && !runOutsideAngular" [totalFrames]="totalFrames" [currentFrame]="currentFrame" (onSliderChange)="onSliderChange($event)"></app-s1-slider>-->
+<!--<h1>{{loopCount}}</h1>-->

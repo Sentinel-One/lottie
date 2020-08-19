@@ -63,6 +63,19 @@ export class DemoComponent implements OnInit, AfterViewChecked {
     this.isPlaying = !this.isPlaying;
   }
 
+  changeAnimation() {
+    this.lottieParams = {
+      ...this.lottieParams,
+      path: 'assets/lottie/s1_test.json'
+    };
+    setTimeout(()=> {
+      this.lottieParams = {
+        ...this.lottieParams,
+        path: 'assets/lottie/s1_logo.json'
+      };
+    }, 600)
+  }
+
   onSliderChange(event) {
     const value = Number(event.target.value);
     const cf = value * this.totalFrames / 100;
@@ -77,6 +90,5 @@ export class DemoComponent implements OnInit, AfterViewChecked {
   }
 
   onSpeedSelected(event) {
-    debugger;
   }
 }

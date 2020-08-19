@@ -5,10 +5,10 @@ import {
   EventEmitter,
   Inject,
   Input,
-  NgZone, OnDestroy,
+  NgZone, OnChanges, OnDestroy,
   OnInit,
   Output,
-  PLATFORM_ID, Renderer2,
+  PLATFORM_ID, Renderer2, SimpleChanges,
   ViewChild
 } from '@angular/core';
 import Lottie, {AnimationConfig, AnimationConfigWithData, AnimationConfigWithPath, AnimationItem} from 'lottie-web';
@@ -29,7 +29,9 @@ export enum LottieEventTypes {
   destroy = 'destroy'
 }
 
-export interface LottieEventType { [key: string]: EventEmitter<AnimationItem>; }
+export interface LottieEventType {
+  [key: string]: EventEmitter<AnimationItem>;
+}
 
 @Component({
   selector: 's1-lottie',
@@ -40,11 +42,11 @@ export interface LottieEventType { [key: string]: EventEmitter<AnimationItem>; }
   `,
   styles: []
 })
-export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
+export class S1LottieComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy {
 
   @Input() width: number;
   @Input() height: number;
-  @Input() options: S1LottieConfig ;
+  @Input() options: S1LottieConfig;
   @Input() optimize = true;
 
   @Output() animationCreated = new EventEmitter<AnimationItem>();
@@ -59,29 +61,42 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnDestroy {
   @Output() DOMLoaded = new EventEmitter<AnimationItem>();
   @Output() destroy = new EventEmitter<AnimationItem>();
 
-  eventEmittersMap: LottieEventType;
+  private eventEmittersMap: LottieEventType;
 
   @ViewChild('lottieContainer', {static: true}) lottieContainer: ElementRef;
 
   private animationInstance: AnimationItem;
   public viewWidth: string;
   public viewHeight: string;
-  observer: IntersectionObserver;
+  private observer: IntersectionObserver;
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
-  private renderer: Renderer2,
-  private ngZone: NgZone) {}
+              private renderer: Renderer2,
+              private ngZone: NgZone) {
+  }
 
-ngOnInit() {
-  this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
-  this.viewWidth  = this.width + 'px' || '100%';
-  this.viewHeight = this.height + 'px' || '100%';
-}
+  ngOnChanges(changes: SimpleChanges): void {
+    if (!changes.options.firstChange) {
+      this.options = changes.options.currentValue;
+      const options: AnimationConfigWithPath & AnimationConfigWithData = S1LottieFactory.setLottiesConfig(this);
+      this.animationInstance?.destroy();
+      this.setS1Lottie(options);
+    }
+  }
+
+  ngOnInit() {
+    this.eventEmittersMap = S1LottieFactory.setLottiesEventTypes(this);
+    this.viewWidth = this.width + 'px' || '100%';
+    this.viewHeight = this.height + 'px' || '100%';
+  }
 
   ngAfterViewInit() {
     if (isPlatformServer(this.platformId)) return;
-
     const options: AnimationConfigWithPath & AnimationConfigWithData = S1LottieFactory.setLottiesConfig(this);
+    this.setS1Lottie(options);
+  }
+
+  setS1Lottie(options) {
     if (this.optimize) {
       this.ngZone.runOutsideAngular(() => {
         this.setLottie(options);
@@ -132,8 +147,8 @@ ngOnInit() {
   }
 
   ngOnDestroy(): void {
-    this.animationInstance && this.animationInstance.destroy();
-    this.observer && this.observer.disconnect();
+    this?.animationInstance.destroy();
+    this?.observer.disconnect();
   }
 
 }
