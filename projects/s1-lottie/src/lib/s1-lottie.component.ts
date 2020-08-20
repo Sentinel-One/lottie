@@ -68,7 +68,7 @@ export class S1LottieComponent implements OnInit, AfterViewInit, OnChanges, OnDe
   private animationInstance: AnimationItem;
   public viewWidth: string;
   public viewHeight: string;
-  private observer: IntersectionObserver;
+  observer: IntersectionObserver;
 
   constructor(@Inject(PLATFORM_ID) private platformId: string,
               private renderer: Renderer2,
