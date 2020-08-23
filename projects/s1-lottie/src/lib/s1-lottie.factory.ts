@@ -3,7 +3,7 @@ import {AnimationConfigWithData, AnimationConfigWithPath} from 'lottie-web';
 
 export class S1LottieFactory {
   constructor() {}
-  
+
   static setLottiesEventTypes(s1LottieInstance: S1LottieComponent): LottieEventType {
     return  {
       complete: s1LottieInstance.complete,
@@ -18,7 +18,7 @@ export class S1LottieFactory {
       destroy: s1LottieInstance.destroy
     };
   }
-  
+
   static setLottiesConfig(s1LottieInstance: S1LottieComponent): AnimationConfigWithPath & AnimationConfigWithData {
     return {
       autoplay: s1LottieInstance.options.autoplay,

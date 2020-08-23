@@ -1,6 +1,6 @@
 {
   "name": "@sentinel-one/s1-lottie",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Lottie Animation Component for Angular apps",
   "keywords": [
     "lottie",
@@ -18,10 +18,8 @@
     "url": "https://github.com/Sentinel-One/lottie/issues"
   },
   "peerDependencies": {
-    "@angular/common": "10.0.10",
-    "@angular/core": "10.0.10",
+    "@angular/common": "^10.0.10",
+    "@angular/core": "^10.0.10",
     "lottie-web": "^5.5.6"
-  },
-  "dependencies": {
   }
 }

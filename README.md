@@ -74,6 +74,24 @@ export class HomePage {
 
 Save your lottie files in the assets folder and change the `path` param, this way they are copied when building your application.
 
+** We also support dynamic loading of new animation files, e.g:
+
+```ts
+
+  changeAnimation() {
+    this.lottieParams = {
+      ...this.lottieParams,
+      path: 'assets/lottie/s1_test.json'
+    };
+    setTimeout(()=> {
+      this.lottieParams = {
+        ...this.lottieParams,
+        path: 'assets/lottie/s1_logo.json'
+      };
+    }, 600)
+  }
+
+```
 ## API
 
 - width: number - if not specified, the player will take 100% of its host.
