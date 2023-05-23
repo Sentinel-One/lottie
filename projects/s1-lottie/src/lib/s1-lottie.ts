@@ -2,7 +2,7 @@ import {CanvasRendererConfig, HTMLRendererConfig, SVGRendererConfig} from 'lotti
 
 export interface S1LottieConfig {
   container?: Element;
-  renderer: 'svg' | 'canvas' | 'html';
+  renderer: 'svg';
   loop: boolean | number;
   path: string;
   autoplay: boolean;
