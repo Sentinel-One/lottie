@@ -1,6 +1,6 @@
 {
   "name": "@sentinel-one/s1-lottie",
-  "version": "1.4.2",
+  "version": "11.2.0",
   "description": "Lottie Animation Component for Angular apps",
   "keywords": [
     "lottie",
