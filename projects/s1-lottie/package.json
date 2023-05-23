@@ -17,6 +17,9 @@
   "bugs": {
     "url": "https://github.com/Sentinel-One/lottie/issues"
   },
+  "dependencies": {
+    "tslib": "^2.0.0"
+  },
   "peerDependencies": {
     "@angular/common": ">=10.0.10",
     "@angular/core": ">=10.0.10",
