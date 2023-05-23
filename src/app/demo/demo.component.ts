@@ -1,5 +1,4 @@
 import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {faPause, faPlay} from '@fortawesome/free-solid-svg-icons';
 import {AnimationItem} from 'lottie-web';
 import {S1LottieConfig} from '../../../projects/s1-lottie/src/lib/s1-lottie';
 
@@ -11,7 +10,6 @@ import {S1LottieConfig} from '../../../projects/s1-lottie/src/lib/s1-lottie';
 export class DemoComponent implements OnInit, AfterViewChecked {
   isPlaying = true;
   runOutsideAngular = false;
-  icon = faPause;
   animation: AnimationItem = null;
   lottieParams: S1LottieConfig;
   totalFrames;
@@ -59,7 +57,6 @@ export class DemoComponent implements OnInit, AfterViewChecked {
 
   togglePlay() {
     this.isPlaying ? this.animation.pause() : this.animation.play();
-    this.icon      = this.isPlaying ? faPlay : faPause;
     this.isPlaying = !this.isPlaying;
   }
 
